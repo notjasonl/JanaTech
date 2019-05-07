@@ -16,8 +16,7 @@ Specifications
 * An easy way to store field trip information, typed in by the teacher  
 * Works for PDF(MCPS field trips) and Microsoft Word forms(School trips)  
 * Delivers final product as a PDF  
-	
+
 Approach
-* Apache PDFBox Library 
-* Java Mail API 
- 
+* Apache PDFBox Library
+* Java Mail API

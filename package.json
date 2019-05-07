@@ -1,9 +1,9 @@
 {
   "name": "janatech",
   "productName": "janatech",
-  "version": "1.0.0",
-  "description": "My Electron application description",
-  "main": "src/index.js",
+  "version": "0.0.1",
+  "description": "SMCS 2021 Client Projects",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
@@ -48,7 +48,8 @@
   },
   "dependencies": {
     "electron-compile": "^6.4.4",
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "express": "^4.16.4"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "^6.24.1",
@@ -61,5 +62,6 @@
     "eslint-plugin-import": "^2",
     "eslint-plugin-jsx-a11y": "^5",
     "eslint-plugin-react": "^7"
-  }
+  },
+  "repository": "https://github.com/jazon-liu/JanaTech.git"
 }
