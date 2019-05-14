@@ -2,12 +2,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="../css/index.css">
+        <link rel="stylesheet" href="../css/main.css">
+
         <meta charset="utf-8">
-        <title></title>
+        <title>Add New Forms</title>
     </head>
     <body>
-        <h1>New page</h1>
+        <h1 class="display-4 jumbo-title">Form Filler <i class="fas fa-clipboard-list"></i></h1>
+        <hr class="my-4">
+        <div class="file-chooser">
+            <input type="file" id="files" name="files[]" multiple />
+            <output id="list"></output>
+        </div>
 
-    <script type="text/javascript" src="../scripts/fill.js" charset="utf-8"></script>
+
+        <script type="text/javascript" src="../scripts/new.js" charset="utf-8"></script>
     </body>
 </html>
