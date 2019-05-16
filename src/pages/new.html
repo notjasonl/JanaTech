@@ -14,12 +14,36 @@
     <body>
         <h1 class="display-4 jumbo-title">Form Filler <i class="fas fa-clipboard-list"></i></h1>
         <hr class="my-4">
-        <div class="file-chooser">
-            <input type="file" id="files" name="files[]" multiple />
-            <output id="list"></output>
-        </div>
+        <form id="uploadForm"
+          enctype="multipart/form-data"
+          action="/api/upload"
+          method="post">
+            <input type="file" name="form" multiple />
+            <input type="submit" value="Upload Form" name="submit">
+            <input type='text' id='random' name='random'><br>
+            <span id = "status"></span>
+        </form>
 
 
         <script type="text/javascript" src="../scripts/new.js" charset="utf-8"></script>
     </body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#uploadForm').submit(function() {
+                $("#status").empty().text("File is uploading...");
+                $(this).ajaxSubmit({
+                    error: function(xhr) {
+                status('Error: ' + xhr.status);
+                    },
+                    success: function(response) {
+                console.log(response)
+                    $("#status").empty().text(response);
+                    }
+            });
+            return false;
+            });    
+        });
+    </script>
 </html>
