@@ -5,6 +5,8 @@ const path = require('path')
 
 const app = express()
 
+const port = 3000
+
 app.use(bodyParser.json())
 
 var storage = multer.diskStorage({
@@ -48,6 +50,6 @@ app.post('/api/upload', function (req, res) {
   })
 })
 
-app.listen(3000, function () {
-  console.log('Working on port 3000')
+app.listen(port, function () {
+  console.log('Server running on http://localhost:' + port)
 })

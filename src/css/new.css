@@ -1,7 +1,11 @@
+#uploadForm {
+    width: 45%;
+    margin-left: auto;
+    margin-right: auto;
+}
 .jumbo-title {
     text-align: center;
 }
-
 #list {
     text-decoration: none;
 }
