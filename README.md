@@ -18,5 +18,5 @@ Specifications
 * Delivers final product as a PDF  
 
 Approach
-* Apache PDFBox Library
-* Java Mail API
+* PDF Form Filler
+* Java Script
