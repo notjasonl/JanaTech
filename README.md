@@ -18,5 +18,8 @@ Specifications
 * Delivers final product as a PDF  
 
 Approach
-* PDF Form Filler
+* PDF Form Filler(JS Library)
 * Java Script
+* Styled with CSS, Bootstrap, and FontAwesome
+* Managed pages with Express.js
+* Webpage is built with HTML and packaged with Electron
