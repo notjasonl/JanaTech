@@ -1,7 +1,6 @@
 .jumbo-title {
     text-align: center;
     margin-top: 30px;
-<<<<<<< Updated upstream
     margin-bottom: 10px;
 }
 .card {
@@ -19,12 +18,4 @@
   margin: 0 !important;
   padding: 0 !important;
   box-sizing: border-box !important;
-=======
-    margin-bottom: 10px; 
-}
-.card {
-    margin-top: 10px;
-    margin-left: 8em;
-    margin-right: 8em;
->>>>>>> Stashed changes
 }

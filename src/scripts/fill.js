@@ -6,8 +6,44 @@ const fs = require('fs')
 
 const folderPath = '/Users/jasonliu/git/JanaTech/uploads'
 
+var fileList = document.getElementById('file-list')
 var confirm = document.getElementById('confirm')
 var folder = document.getElementById('user-select')
+
+let files = readFilesSync(folderPath)
+console.log(files)
+let output = []
+
+files.forEach(function (file) {
+  if (file.ext === '') {
+    
+  } else {
+    if (file.ext !== '.docx' || file.ext !== '.pdf') {
+
+    } else {
+      if (file.ext === '.docx') {
+        processDocx(file)
+      }
+    }
+  }
+})
+
+function readFilesSync (dir) {
+  const files = []
+
+  fs.readdirSync(dir).forEach(filename => {
+    files.push(fs.readFile(path.join(dir, filename)))
+  })
+  return files
+}
+
+function processDocx (file) {
+  mammoth.convertToHtml
+}
+
+function processPdf (file) {
+
+}
 
 // confirm.onclick = function () {
 //   // let reader = new FileReader()
@@ -31,25 +67,3 @@ var folder = document.getElementById('user-select')
 //   //   console.log(files[i])
 //   // }
 // }
-
-files = readFilesSync(folderPath)
-console.log(files)
-
-function readFilesSync(dir) {
-  const files = []
-
-  fs.readdirSync(dir).forEach(filename => {
-    const name = path.parse(filename).name
-    const ext = path.parse(filename).ext
-    const filepath = path.resolve(dir, filename)
-    const stat = fs.statSync(filepath)
-    const isFile = stat.isFile()
-
-    if (isFile) files.push({ filepath, name, ext, stat })
-  });
-
-  files.sort((a, b) => {
-    return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' })
-  });
-  return files
-}

@@ -38,8 +38,8 @@ app.get('/tutorial', function (req, res) {
   res.sendFile(path.join(__dirname, '/pages/tutorial.html'))
 })
 
-app.get('/help', function (req, res){
-	res.sendFile(path.join(__dirname, '/pages/help.html'))
+app.get('/help', function (req, res) {
+  res.sendFile(path.join(__dirname, '/pages/help.html'))
 })
 
 app.post('/api/upload', function (req, res) {
