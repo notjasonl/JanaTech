@@ -28,7 +28,7 @@ files.forEach(function (file) {
     }
   }
 })
-
+// read all files in directory synchronously
 function readFilesSync (dir) {
   const files = []
 
@@ -38,14 +38,18 @@ function readFilesSync (dir) {
   return files
 }
 
+// called if the file is a .docx file
 function processDocx (file) {
   mammoth.convertToHtml(file)
     .then(function (result) {
       let fields = result.value.split('<p>')
       fields.forEach(function (field) {
         if ((field.match(/_/g)||[]).length > 7) {
-          let firstUnder = field.indexOf('_')
-          
+          field = field.replace(/<[^>]*>/g, '')
+          let words = field.split(' ')
+          for (let i = 0; i < words.length; i++) {
+            
+          }
         }
       })
     })
@@ -53,6 +57,10 @@ function processDocx (file) {
 
 function processPdf (file) {
 
+}
+
+function searchChar (arr) {
+  
 }
 
 function fieldSearch(html) {
