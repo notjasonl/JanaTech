@@ -1,29 +1,30 @@
 const ipc = require('electron').ipcRenderer
 const mammoth = require('mammoth')
-const FileReader = require('filereader')
+// const FileReader = require('filereader')
+const fileType = require('file-type')
 const path = require('path')
 const fs = require('fs')
 
-const folderPath = '/Users/jasonliu/git/JanaTech/uploads'
+// const folderPath = '/Users/jasonliu/git/JanaTech/uploads'
+const folderPath = 'C:/Users/dev/git/JanaTech/uploads'
 
 var fileList = document.getElementById('file-list')
 var confirm = document.getElementById('confirm')
 var folder = document.getElementById('user-select')
 
 let files = readFilesSync(folderPath)
-console.log(files)
+// console.log(files)
 let output = []
 
 files.forEach(function (file) {
-  if (file.ext === '') {
-    
-  } else {
-    if (file.ext !== '.docx' || file.ext !== '.pdf') {
+  console.log(Buffer.isBuffer(file))
+  console.log(fileType(file))
+  if (fileType(file) === undefined) {} else {
+    if (fileType(file).ext === 'docx') {
+      processDocx(file)
+    }
+    else if (fileType(file).ext === 'pdf') {
 
-    } else {
-      if (file.ext === '.docx') {
-        processDocx(file)
-      }
     }
   }
 })
@@ -32,17 +33,28 @@ function readFilesSync (dir) {
   const files = []
 
   fs.readdirSync(dir).forEach(filename => {
-    files.push(fs.readFile(path.join(dir, filename)))
+    files.push(fs.readFileSync(path.join(dir, filename)))
   })
   return files
 }
 
 function processDocx (file) {
-  mammoth.convertToHtml
+  mammoth.convertToHtml(file)
+    .then(function (result) {
+      console.log(result.value)
+      let fieldNames = fieldSearch(result.value)
+    })
 }
 
 function processPdf (file) {
 
+}
+
+function fieldSearch(html) {
+  let chunks = html.split('<p>')
+  for (let chunk in chunks) {
+    
+  }
 }
 
 // confirm.onclick = function () {
