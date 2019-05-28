@@ -53,7 +53,7 @@ function processPdf (file) {
 function fieldSearch(html) {
   let chunks = html.split('<p>')
   for (let chunk in chunks) {
-    
+    for ()
   }
 }
 
