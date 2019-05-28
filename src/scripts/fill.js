@@ -5,8 +5,8 @@ const fileType = require('file-type')
 const path = require('path')
 const fs = require('fs')
 
-// const folderPath = '/Users/jasonliu/git/JanaTech/uploads'
-const folderPath = 'C:/Users/dev/git/JanaTech/uploads'
+const folderPath = '/Users/jasonliu/git/JanaTech/uploads'
+// const folderPath = 'C:/Users/dev/git/JanaTech/uploads'
 
 var fileList = document.getElementById('file-list')
 var confirm = document.getElementById('confirm')
@@ -41,8 +41,13 @@ function readFilesSync (dir) {
 function processDocx (file) {
   mammoth.convertToHtml(file)
     .then(function (result) {
-      console.log(result.value)
-      let fieldNames = fieldSearch(result.value)
+      let fields = result.value.split('<p>')
+      fields.forEach(function (field) {
+        if ((field.match(/_/g)||[]).length > 7) {
+          let firstUnder = field.indexOf('_')
+          
+        }
+      })
     })
 }
 
@@ -52,9 +57,9 @@ function processPdf (file) {
 
 function fieldSearch(html) {
   let chunks = html.split('<p>')
-  for (let chunk in chunks) {
-    for ()
-  }
+  // for (let chunk in chunks) {
+  //   for ()
+  // }
 }
 
 // confirm.onclick = function () {
