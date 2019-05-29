@@ -1,1 +1,23 @@
-
+.border {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  border: 12px solid #0011 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+.list {
+  background-color: #7f8693;
+  font-size: 24px;
+  font-weight: bold;
+  width: 50%;
+}
+.list-contents {
+  width: 50%;
+  height: 150px;
+  padding: 25px;
+  border: 1px solid blue;
+}
