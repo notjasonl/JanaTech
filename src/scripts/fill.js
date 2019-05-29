@@ -31,7 +31,6 @@ files.forEach(function (file) {
 // read all files in directory synchronously
 function readFilesSync (dir) {
   const files = []
-
   fs.readdirSync(dir).forEach(filename => {
     files.push(fs.readFileSync(path.join(dir, filename)))
   })
@@ -47,9 +46,22 @@ function processDocx (file) {
         if ((field.match(/_/g)||[]).length > 7) {
           field = field.replace(/<[^>]*>/g, '')
           let words = field.split(' ')
+          words = words.filter(v=>v!='');
+          let fieldNames = []
           for (let i = 0; i < words.length; i++) {
-            
+            let nextStart = 0
+            if (words[i].includes('_')) {
+              console.log(i)
+              let fieldName = ""
+              for (let j = nextStart; j < i; j++) {
+                fieldName += words[i]
+                console.log(fieldName)
+              }
+              fieldNames.push(fieldName)
+              nextStart = i + 1
+            }
           }
+          console.log(fieldNames)
         }
       })
     })
@@ -60,7 +72,7 @@ function processPdf (file) {
 }
 
 function searchChar (arr) {
-  
+
 }
 
 function fieldSearch(html) {
