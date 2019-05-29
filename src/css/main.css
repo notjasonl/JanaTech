@@ -1,3 +1,15 @@
 /* html {
     background-color: #e9ecef;
 } */
+.border {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  border: 12px solid #0011 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+© 2019 GitHub, Inc.
