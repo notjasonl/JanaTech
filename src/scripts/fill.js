@@ -15,13 +15,14 @@ var folder = document.getElementById('user-select')
 let files = readFilesSync(folderPath)
 // console.log(files)
 let output = []
+let allFieldNames = []
 
 files.forEach(function (file) {
-  console.log(Buffer.isBuffer(file))
-  console.log(fileType(file))
+  // console.log(Buffer.isBuffer(file))
+  // console.log(fileType(file))
   if (fileType(file) === undefined) {} else {
     if (fileType(file).ext === 'docx') {
-      processDocx(file)
+      console.log(processDocx(file))
     }
     else if (fileType(file).ext === 'pdf') {
 
@@ -38,33 +39,34 @@ function readFilesSync (dir) {
 }
 
 // called if the file is a .docx file
+// returns list of field names
 function processDocx (file) {
   mammoth.convertToHtml(file)
     .then(function (result) {
+      let names = []
       let fields = result.value.split('<p>')
       fields.forEach(function (field) {
         if ((field.match(/_/g)||[]).length > 7) {
           field = field.replace(/<[^>]*>/g, '')
           let words = field.split(' ')
           words = words.filter(v=>v!='');
-          let fieldNames = []
-          for (let i = 0; i < words.length; i++) {
-            let nextStart = 0
-            if (words[i].includes('_')) {
-              console.log(i)
-              let fieldName = ""
-              for (let j = nextStart; j < i; j++) {
-                fieldName += words[i]
-                console.log(fieldName)
-              }
-              fieldNames.push(fieldName)
-              nextStart = i + 1
-            }
-          }
-          console.log(fieldNames)
+          let fieldNames = fieldSearch(words)
+          fieldNames.forEach(function (element) {
+            names.push(element)
+          })
         }
       })
+      // console.log(names)
+      return names
     })
+}
+
+function dataOut(data) {
+  return data
+}
+
+function fillDocx (file, data) {
+
 }
 
 function processPdf (file) {
@@ -75,11 +77,21 @@ function searchChar (arr) {
 
 }
 
-function fieldSearch(html) {
-  let chunks = html.split('<p>')
-  // for (let chunk in chunks) {
-  //   for ()
-  // }
+function fieldSearch (words) {
+  let fieldNames = []
+  let nextStart = 0
+  for (let i = 0; i < words.length; i++) {
+    if (words[i].includes('_')) {
+      let fieldName = ''
+      for (let j = nextStart; j < i; j++) {
+        // console.log(words[j], j)
+        fieldName += words[j]
+      }
+      fieldNames.push(fieldName)
+      nextStart = i + 1
+    }
+  }
+  return fieldNames
 }
 
 // confirm.onclick = function () {
