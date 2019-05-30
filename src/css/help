@@ -11,6 +11,7 @@
 }
 .list {
   background-color: #7f8693;
+  padding-left: 10px;
   font-size: 24px;
   font-weight: bold;
   width: 50%;
