@@ -22,8 +22,9 @@ head {
   padding: 0 !important;
   box-sizing: border-box !important;
 }
-.list {
-  background-color: #7f8693;
+.list { 
+  border-style: groove;
+  border-color: #7f8693;
   padding-left: 10px;
   font-size: 24px;
   font-weight: bold;
