@@ -1,3 +1,16 @@
+#file-list {
+    list-style: none;
+
+}
+head {
+    text-color: black;
+    
+}
+.jumbo-title {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
 .border {
   position: fixed !important;
   top: 0 !important;
@@ -9,8 +22,9 @@
   padding: 0 !important;
   box-sizing: border-box !important;
 }
-.list {
-  background-color: #7f8693;
+.list { 
+  border-style: groove;
+  border-color: #7f8693;
   padding-left: 10px;
   font-size: 24px;
   font-weight: bold;
