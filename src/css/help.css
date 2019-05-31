@@ -12,7 +12,8 @@ head {
     margin-bottom: 10px;
 }
 .border {
-  position: fixed !important;
+  overflow: scroll;
+  /*position: fixed !important;*/
   top: 0 !important;
   left: 0 !important;
   border: 12px solid #0011 !important;
@@ -28,10 +29,18 @@ head {
   padding-left: 10px;
   font-size: 24px;
   font-weight: bold;
-  width: 50%;
+  width: 100%;
 }
 .list-contents {
-  width: 50%;
+  width: 49%;
   padding: 25px;
+  border: 1px solid blue;
+}
+.example {
+  overflow: scroll;
+  float: right;
+  width: 49%;
+  padding: 10px;
+  padding-top: 25px;
   border: 1px solid blue;
 }
