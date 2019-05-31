@@ -61,10 +61,6 @@ function processDocx (file) {
     })
 }
 
-function dataOut(data) {
-  return data
-}
-
 function fillDocx (file, data) {
 
 }
