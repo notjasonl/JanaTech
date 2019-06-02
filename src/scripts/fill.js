@@ -17,6 +17,8 @@ let files = readFilesSync(folderPath)
 let output = []
 let allFieldNames = []
 // let testNames = ['NameofFieldTrip', 'FieldTripSponsor/AccountManager', 'DateofFieldTrip', 'FieldTripAccountNumber', 'NameofSubstitute', 'SubstituteIDNumber', 'NameofStaffRequiringSubstitute']
+let testData = ['testTrip', 'test test', '06/01/19', '123435', 'abcde', '123456', 'test']
+
 
 files.forEach(function (file) {
   // console.log(Buffer.isBuffer(file))
@@ -44,12 +46,9 @@ function readFilesSync (dir) {
   return files
 }
 
-async function waiting(file) {
-  let data = await processDocx(file)
-  return data
-}
-
-function fillDocx () {
+// accepts data in order of field names
+// should return 
+function fillDocx (names, data) {
 
 }
 
