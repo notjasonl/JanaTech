@@ -23,6 +23,7 @@ files.forEach(function (file) {
   if (fileType(file) === undefined) {} else {
     if (fileType(file).ext === 'docx') {
       console.log(processDocx(file))
+      
     }
     else if (fileType(file).ext === 'pdf') {
 
@@ -41,7 +42,7 @@ function readFilesSync (dir) {
 // called if the file is a .docx file
 // returns list of field names
 function processDocx (file) {
-  mammoth.convertToHtml(file)
+  return mammoth.convertToHtml(file)
     .then(function (result) {
       let names = []
       let fields = result.value.split('<p>')
@@ -49,7 +50,7 @@ function processDocx (file) {
         if ((field.match(/_/g)||[]).length > 7) {
           field = field.replace(/<[^>]*>/g, '')
           let words = field.split(' ')
-          words = words.filter(v=>v!='');
+          words = words.filter(v => v !='')
           let fieldNames = fieldSearch(words)
           fieldNames.forEach(function (element) {
             names.push(element)
@@ -57,8 +58,9 @@ function processDocx (file) {
         }
       })
       // console.log(names)
-      return names
+      return Promise.resolve(names)
     })
+  // return fields
 }
 
 function fillDocx (file, data) {
