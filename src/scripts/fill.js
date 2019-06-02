@@ -16,13 +16,18 @@ let files = readFilesSync(folderPath)
 // console.log(files)
 let output = []
 let allFieldNames = []
+// let testNames = ['NameofFieldTrip', 'FieldTripSponsor/AccountManager', 'DateofFieldTrip', 'FieldTripAccountNumber', 'NameofSubstitute', 'SubstituteIDNumber', 'NameofStaffRequiringSubstitute']
 
 files.forEach(function (file) {
   // console.log(Buffer.isBuffer(file))
   // console.log(fileType(file))
   if (fileType(file) === undefined) {} else {
     if (fileType(file).ext === 'docx') {
-      console.log(processDocx(file))
+      processDocx(file)
+      setTimeout(() => {
+        console.log(allFieldNames)
+      }, 1500)
+      
       
     }
     else if (fileType(file).ext === 'pdf') {
@@ -39,10 +44,19 @@ function readFilesSync (dir) {
   return files
 }
 
+async function waiting(file) {
+  let data = await processDocx(file)
+  return data
+}
+
+function fillDocx () {
+
+}
+
 // called if the file is a .docx file
 // returns list of field names
 function processDocx (file) {
-  return mammoth.convertToHtml(file)
+  mammoth.convertToHtml(file)
     .then(function (result) {
       let names = []
       let fields = result.value.split('<p>')
@@ -58,7 +72,7 @@ function processDocx (file) {
         }
       })
       // console.log(names)
-      return Promise.resolve(names)
+      allFieldNames = names
     })
   // return fields
 }
