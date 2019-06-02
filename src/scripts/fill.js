@@ -4,6 +4,7 @@ const mammoth = require('mammoth')
 const fileType = require('file-type')
 const path = require('path')
 const fs = require('fs')
+const ls = require('local-storage')
 
 const folderPath = '/Users/jasonliu/git/JanaTech/uploads'
 // const folderPath = 'C:/Users/dev/git/JanaTech/uploads'
@@ -20,6 +21,7 @@ let allFieldNames = []
 let testData = ['testTrip', 'test test', '06/01/19', '123435', 'abcde', '123456', 'test']
 
 
+
 files.forEach(function (file) {
   // console.log(Buffer.isBuffer(file))
   // console.log(fileType(file))
@@ -27,8 +29,9 @@ files.forEach(function (file) {
     if (fileType(file).ext === 'docx') {
       processDocx(file)
       setTimeout(() => {
+        allFieldNames = allFieldNames.map(x => x.trim())
         console.log(allFieldNames)
-      }, 1500)
+      }, 300)
       
       
     }
@@ -48,7 +51,7 @@ function readFilesSync (dir) {
 
 // accepts data in order of field names
 // should return 
-function fillDocx (names, data) {
+function fillDocx (file, data) {
 
 }
 
@@ -62,8 +65,9 @@ function processDocx (file) {
       fields.forEach(function (field) {
         if ((field.match(/_/g)||[]).length > 7) {
           field = field.replace(/<[^>]*>/g, '')
-          let words = field.split(' ')
+          let words = field.split(/\b(\s)/)
           words = words.filter(v => v !='')
+          // words = words.map(w => w.trim())
           let fieldNames = fieldSearch(words)
           fieldNames.forEach(function (element) {
             names.push(element)
