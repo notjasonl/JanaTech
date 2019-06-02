@@ -21,21 +21,51 @@
       <div id = "newForm">
           
       </div>
-        
+      <div id="results"></div>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
       <script>
         function createForms(fieldsArray){
-            var str;
+            var str=[];
             var i;
             for(i = 0; i <fieldsArray.length; i++){
-                str = str.append('<form><label value ="').append(fieldsArray[i].append('">').append('</label>');
-                //console.log(str)
+                str.push('<form><label value ="');
+                str.push(fieldsArray[i]);
+                str.push('">');
+                str.push(fieldsArray[i]);
+                str.push('<input type="text" id="'+fieldsArray[i]+'">');
+                str.push('</label>');
+                console.log(str)
             }
-            $('#newForm').append(str);                                                  
-        }
-       </script>
+            str.push('<button id="submit1">Submit</button>');
+            $('#newForm').append(str.join(''));                                                  
+          }
+      </script>
+  
+      <script>
+          $(document).ready(function(){
+            var fields = ["name", "school", "teacher"];
+            createForms(fields);
+            $('#submit1').click(function(event) {
+              event.preventDefault();
+              for(i = 0; i <fields.length; i++){
+                $('#results').append($('#'+fields[i]).val());
+                $(location).attr('href', 'fill');
+              }
+            });
+          });
+      </script>
 
-          
+
+
+
+
+
+
+
+
+
+
 
     </body>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
 </html>
