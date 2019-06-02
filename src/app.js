@@ -34,10 +34,6 @@ app.get('/fill', function (req, res) {
   res.sendFile(path.join(__dirname, '/pages/fill.html'))
 })
 
-app.get('/tutorial', function (req, res) {
-  res.sendFile(path.join(__dirname, '/pages/tutorial.html'))
-})
-
 app.get('/help', function (req, res) {
   res.sendFile(path.join(__dirname, '/pages/help.html'))
 })

@@ -6,19 +6,18 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
         <link rel="stylesheet" href="../css/main.css">
         <meta charset="utf-8">
-        <title></title>
     </head>
     <body class="border">
-      <h1 class="display-4 jumbo-title">Previous Data <i class="fas fa-clipboard-list"></i></h1>
+      <h1 class="display-4 jumbo-title">Fill in Data<i class="fas fa-clipboard-list"></i></h1>
       <div class="jumbotron jumbotron-fluid" >
         <div class="container">
-          <h1 class="display-4">Fill in the data</h1>
+          <h1 class="display-4">Do not hit Enter until all fields are filled </h1>
           <hr class="my-4">
         </div>
       </div>
       
       <!-- Takes in an array of the fields and makes a HTML Form for them dynamically -->
-      <div id = "newForm">
+      <div id = "newForm" style="text-align: center">
           
       </div>
       <div id="results"></div>
@@ -32,8 +31,9 @@
                 str.push(fieldsArray[i]);
                 str.push('">');
                 str.push(fieldsArray[i]);
-                str.push('<input type="text" id="'+fieldsArray[i]+'">');
+                str.push('  <input type="text" id="'+fieldsArray[i]+'">');
                 str.push('</label>');
+                str.push('<br></br>');
                 console.log(str)
             }
             str.push('<button id="submit1">Submit</button>');
@@ -43,13 +43,13 @@
   
       <script>
           $(document).ready(function(){
-            var fields = ["name", "school", "teacher"];
+            var fields = ["name", "school", "teacher"];//test data
             createForms(fields);
             $('#submit1').click(function(event) {
               event.preventDefault();
               for(i = 0; i <fields.length; i++){
                 $('#results').append($('#'+fields[i]).val());
-                $(location).attr('href', 'fill');
+                //$(location).attr('href', 'fill.html');
               }
             });
           });
