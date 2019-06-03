@@ -2,6 +2,17 @@
 
 Poolesville High School SMCS Class of 2021 Client Project for Erin Binns  
 Creating a Field Trip Paperwork filler   
+
+## Setup Development Environment
+
+```
+git clone https://github.com/jazon-liu/JanaTech.git
+cd JanaTech
+npm install  
+npm start  
+```
+
+
 Team Members  
 * Amruth Nare: Project Manager  
 * Arjun Rakheja: Lead Tester  
