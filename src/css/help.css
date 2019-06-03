@@ -36,6 +36,11 @@ head {
   padding: 25px;
   border: 1px solid blue;
 }
+.list-contents2 {
+  width: 100%;
+  padding: 25px;
+  border: 1px solid blue;
+}
 .example {
   overflow: scroll;
   float: right;

@@ -38,6 +38,10 @@ app.get('/help', function (req, res) {
   res.sendFile(path.join(__dirname, '/pages/help.html'))
 })
 
+app.get('/finish', function (req, res) {
+  res.sendFile(path.join(__dirname, '/pages/finish.html'))
+])
+
 app.post('/api/upload', function (req, res) {
   upload(req, res, function (err) {
   // console.log(req.body);
