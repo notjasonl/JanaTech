@@ -14,28 +14,6 @@ var confirm = document.getElementById('confirm')
 var folder = document.getElementById('user-select')
 
 let files = readFilesSync(folderPath)
-// console.log(files)
-let output = []
-let allFieldNames = []
-// let testNames = ['NameofFieldTrip', 'FieldTripSponsor/AccountManager', 'DateofFieldTrip', 'FieldTripAccountNumber', 'NameofSubstitute', 'SubstituteIDNumber', 'NameofStaffRequiringSubstitute']
-let testData = ['testTrip', 'test test', '06/01/19', '123435', 'abcde', '123456', 'test']
-
-// files.forEach(function (file) {
-//   // console.log(Buffer.isBuffer(file))
-//   // console.log(fileType(file))
-//   if (fileType(file) === undefined) {} else {
-//     if (fileType(file).ext === 'docx') {
-//       processDocx(file)
-//       setTimeout(() => {
-//         allFieldNames = allFieldNames.map(x => x.trim())
-//         console.log(allFieldNames)
-//       }, 300)
-//     }
-//     else if (fileType(file).ext === 'pdf') {
-
-//     }
-//   }
-// })
 
 // docx and pdf are expected to be arrays of indices where those files are found
 // directory is a file path pointing to the directory where files are uploaded
@@ -44,7 +22,7 @@ function fillAll (directory) {
   for (let i = 0; i < files.length; i++) {
     if (fileType(files[i]) === undefined) {} else {
       if (fileType(files[i]).ext === 'docx') {
-        let fields;
+        let fields = []
         setTimeout(() => { fields = ls.get(i.toString()) })
         fill(files[i], fields, )
       }
@@ -62,6 +40,12 @@ function fillAll (directory) {
 // Should save the filled docx to /uploads
 function fill (file, fields, data, isDocx) {
 
+}
+
+function processData (fields, data) {
+  fields.forEach(function (field) {
+
+  })
 }
 
 // read all files in directory synchronously
