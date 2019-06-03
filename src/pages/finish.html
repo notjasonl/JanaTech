@@ -10,11 +10,32 @@
     <title>Forms Complete</title>
   </head>
   <!-- The function will call the fill.js automatically -->
-  <script>
-  function(){
   
-  }
-  </script>
+  <script>
+     function emailFunction(){
+       var transporter = nodemailer.createTransport(service: 'gmail',
+        auth: {
+          user: 'janatech.smcs2021@gmail.com',
+          pass: 'loyson352'
+        });
+       const mailOptions = {
+        from: 'janatech.smcs2021@email.com', // sender address
+        to: document.getElementByID('email'), // receiver is the user's inputted email
+        subject: 'Field Trip Forms', // Subject line
+        attachments: [ //NEED TO DO THIS NEED TO DO THIS
+          filename:'',
+          // However we get the filled forms go here
+        ]
+       };
+      transporter.sendMail(mailOptions, function (err, info) {
+   if(err)
+     console.log(err)
+   else
+     console.log(info);
+     });
+       };
+     </script>
+  
   <div class="border">
     <body>
       <h1 class="display-4 jumbo-title">Form Filler <i class="fas fa-clipboard-list"></i></h1>
