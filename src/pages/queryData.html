@@ -28,13 +28,10 @@
     <script>
         //const ls = require(local-storage)
         //letls.get('1') => ['name', 'date'] 
-
-
         function createForms(fieldsArray){
             var str=[];
             var i;
             for(i = 0; i <fieldsArray.length; i++){
-                console.log("g");
                 str.push('<form><label value ="');
                 str.push(fieldsArray[i]);
                 str.push('">');
@@ -59,7 +56,6 @@
                 $('#results').append($('#'+fields[i]).val());
                 window.localStorage.setItem(fields[i], $('#'+fields[i]).val())
                 $(location).attr('href', 'fill');
-                
               }
             });
           });
