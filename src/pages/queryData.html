@@ -20,17 +20,21 @@
       <div id="newForm" style="text-align: center">
           
       </div>
-      <div id="results"></div>
+
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script>
-        const ls = require(local-storage)
-        letls.get('1') => ['name', 'date'] 
+    
+    
+    
+    <script>
+        //const ls = require(local-storage)
+        //letls.get('1') => ['name', 'date'] 
 
 
         function createForms(fieldsArray){
             var str=[];
             var i;
             for(i = 0; i <fieldsArray.length; i++){
+                console.log("g");
                 str.push('<form><label value ="');
                 str.push(fieldsArray[i]);
                 str.push('">');
@@ -53,8 +57,9 @@
               event.preventDefault();
               for(i = 0; i <fields.length; i++){
                 $('#results').append($('#'+fields[i]).val());
-                //$(location).attr('href', 'fill.html');
-                // ls.set("id", data)
+                window.localStorage.setItem(fields[i], $('#'+fields[i]).val())
+                $(location).attr('href', 'fill');
+                
               }
             });
           });
