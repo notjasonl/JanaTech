@@ -17,8 +17,11 @@
       </div>
       
       <!-- Takes in an array of the fields and makes a HTML Form for them dynamically -->
-      <div id="newForm" style="text-align: center">
+      <div id="form" style="text-align: center">
           
+      </div> 
+      <div id="results">
+
       </div>
 
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -31,33 +34,44 @@
         function createForms(fieldsArray){
             var str=[];
             var i;
+            str.push('<form id="formInside">')
             for(i = 0; i <fieldsArray.length; i++){
-                str.push('<form><label value ="');
-                str.push(fieldsArray[i]);
-                str.push('">');
-                str.push(fieldsArray[i]);
-                str.push('  <input type="text" id="'+fieldsArray[i]+'">');
-                str.push('</label>');
-                str.push('<br></br>');
-                console.log(str)
+                str.push('<label value ="')
+                str.push(fieldsArray[i])
+                str.push('">')
+                str.push(fieldsArray[i])
+                str.push('  <input type="text" id="'+fieldsArray[i]+'" name="'+fieldsArray[i]+ '">')
+                str.push('</label>')
+                str.push('<br></br>')
             }
-            str.push('<button id="submit1">Submit</button>');
-            $('#newForm').append(str.join(''));                                                  
+            str.push('</form>')
+            str.push('<button id="submit1">Submit</button>')
+            
+            $('#form').append(str.join(''))
           }
+          function objectifyForm(formArray) {//serialize data function
+            var returnArray = {};
+            for (var i = 0; i < formArray.length; i++){
+              returnArray[formArray[i]['name']] = formArray[i]['value'];
+            }
+            return returnArray;
+        }
       </script>
   
       <script>
           $(document).ready(function(){
+            window.localStorage.clear()
             var fields = ["name", "school", "teacher"];//test data
             createForms(fields);
-            $('#submit1').click(function(event) {
+            $('#submit1').click(function (event) {
+              var data = objectifyForm($('#formInside').serializeArray())
+              window.localStorage.setItem("formData", data)
               event.preventDefault();
-              for(i = 0; i <fields.length; i++){
-                $('#results').append($('#'+fields[i]).val());
-                window.localStorage.setItem(fields[i], $('#'+fields[i]).val())
-                $(location).attr('href', 'fill');
-              }
-            });
+            })
+            // $('#formInside').submit(function (event) {
+            //   console.log($(this).serializeArray());
+            //   event.preventDefault();
+            // });
           });
       </script>
 
