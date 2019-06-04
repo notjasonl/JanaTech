@@ -47,6 +47,7 @@
 		}
 	},
 	"dependencies": {
+		"docx-pdf": "0.0.1",
 		"electron-compile": "^6.4.4",
 		"electron-squirrel-startup": "^1.0.0",
 		"express": "^4.16.4",
@@ -57,9 +58,11 @@
 		"mammoth": "^1.4.8",
 		"multer": "^1.4.1",
 		"nan": "^2.14.0",
+		"office-converter": "^1.0.2",
 		"path": "^0.12.7",
 		"pdffiller": "0.0.11",
-		"pdftohtmljs": "^0.5.2"
+		"pdftohtmljs": "^0.5.2",
+		"requirejs": "^2.3.6"
 	},
 	"devDependencies": {
 		"babel-plugin-transform-async-to-generator": "^6.24.1",
