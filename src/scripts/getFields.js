@@ -4,14 +4,13 @@ const mammoth = require('mammoth')
 const fileType = require('file-type')
 const path = require('path')
 const fs = require('fs')
-const ls = require('local-storage')
 
 // This JS is intended to get the fields from all files in the local folder, and put them into local storage
 // Should only be called once
 // Utilizes the browser's local storage functionality to store persistant data
 
-// const folderPath = '/Users/jasonliu/git/JanaTech/uploads'
-const folderPath = 'C:/Users/dev/git/JanaTech/uploads'
+const folderPath = '/Users/jasonliu/git/JanaTech/uploads'
+// const folderPath = 'C:/Users/dev/git/JanaTech/uploads'
 
 let files = readFilesSync(folderPath)
 // Use these to locate the fields afterwards
@@ -20,7 +19,7 @@ let pdfIndices = []
 
 pushToStorage(files)
 
-//Puts in different array based on file extension
+// Puts in different array based on file extension
 function pushToStorage (files) {
   for (let i = 0; i < files.length; i++) {
     if (fileType(files[i]) === undefined) {} else {
@@ -33,9 +32,9 @@ function pushToStorage (files) {
       }
     }
   }
-  //Setting to LocalStorage
-  ls.set('docxIndices', docxIndices)
-  ls.set('pdfIndices', pdfIndices)
+  // Setting to LocalStorage
+  window.localStorage.setItem('docxIndices', docxIndices)
+  window.localStorage.setItem('pdfIndices', pdfIndices)
 }
 
 // read all files in directory synchronously
@@ -47,26 +46,26 @@ function readFilesSync (dir) {
   return files
 }
 
-//Converts to HTML 
+// Converts to HTML
 function fieldsDocx (file, id) {
   mammoth.convertToHtml(file)
     .then(function (result) {
       let names = []
       let fields = result.value.split('<p>')
       fields.forEach(function (field) {
-        if ((field.match(/_/g) || []).length > 7) { //Looks for the __
+        if ((field.match(/_/g) || []).length > 7) { // Looks for the __
           field = field.replace(/<[^>]*>/g, '')
           let words = field.split(/\b(\s)/)
-          words = words.filter(v => v != '')  //Finds the fields
+          words = words.filter(v => v != '') // Finds the fields
           // words = words.map(w => w.trim())
           let fieldNames = fieldSearch(words)
           fieldNames.forEach(function (element) {
-            names.push(element) //Stores fields in an array
+            names.push(element) // Stores fields in an array
           })
         }
       })
       // console.log(names)
-      ls.set(id, names)
+      window.localStorage.setItem(id, names)
     })
   // return fields
 }
@@ -75,7 +74,7 @@ function fieldsPdf (file, id) {
 
 }
 
-//Pushes fields into an array
+// Pushes fields into an array
 function fieldSearch (words) {
   let fieldNames = []
   let nextStart = 0

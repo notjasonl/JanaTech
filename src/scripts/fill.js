@@ -1,4 +1,4 @@
-const ipc = require('electron').ipcRenderer
+// const ipc = require('electron').ipcRenderer
 const mammoth = require('mammoth')
 // const FileReader = require('filereader')
 const fileType = require('file-type')
@@ -9,16 +9,23 @@ const ls = require('local-storage')
 const folderPath = '/Users/jasonliu/git/JanaTech/uploads'
 // const folderPath = 'C:/Users/dev/git/JanaTech/uploads'
 
-var fileList = document.getElementById('file-list')
-var confirm = document.getElementById('confirm')
-var folder = document.getElementById('user-select')
+// var fileList = document.getElementById('file-list')
+// var confirm = document.getElementById('confirm')
+// var folder = document.getElementById('user-select')
 
 let files = readFilesSync(folderPath)
 
+let docxIndices = []
+let pdfIndices = []
+
+pushToStorage(files)
+
 setTimeout(() => {
-  let fields = ls.get('1')
+  let fields = window.localStorage.getItem('1')
   console.log(fields)
 })
+
+// fillAll(folderPath)
 // processData(ls.get('1'))
 
 // docx and pdf are expected to be arrays of indices where those files are found
@@ -29,13 +36,13 @@ function fillAll (directory) {
     if (fileType(files[i]) === undefined) {} else {
       if (fileType(files[i]).ext === 'docx') {
         let fields = []
-        let data = ls.get('formData')
-        setTimeout(() => { fields = ls.get(i.toString()) })
+        let data = window.localStorage.getItem('formData')
+        console.log(data)
+        setTimeout(() => { fields = window.localStorage.getItem(i.toString()) })
         fill(files[i], fields, data, true)
-      }
-      else if (fileType(files[i]).ext === 'pdf') {
+      } else if (fileType(files[i]).ext === 'pdf') {
         let fields = []
-        setTimeout(() => { fields = ls.get(i.toString()) })
+        setTimeout(() => { fields = window.localStorage.getItem(i.toString()) })
       }
     }
   }
@@ -70,39 +77,53 @@ function readFilesSync (dir) {
   return files
 }
 
-// called if the file is a .docx file
-// returns list of field names
-// function processDocx (file) {
-//   mammoth.convertToHtml(file)
-//     .then(function (result) {
-//       let names = []
-//       let fields = result.value.split('<p>')
-//       fields.forEach(function (field) {
-//         if ((field.match(/_/g)||[]).length > 7) {
-//           field = field.replace(/<[^>]*>/g, '')
-//           let words = field.split(/\b(\s)/)
-//           words = words.filter(v => v !== '')
-//           // words = words.map(w => w.trim())
-//           let fieldNames = fieldSearch(words)
-//           fieldNames.forEach(function (element) {
-//             names.push(element)
-//           })
-//         }
-//       })
-//       // console.log(names)
-//       allFieldNames = names
-//     })
-//   // return fields
-// }
+// Puts in different array based on file extension
+function pushToStorage (files) {
+  for (let i = 0; i < files.length; i++) {
+    if (fileType(files[i]) === undefined) {} else {
+      if (fileType(files[i]).ext === 'docx') {
+        docxIndices.push(i)
+        fieldsDocx(files[i], i)
+      } else if (fileType(files[i]).ext === 'pdf') {
+        pdfIndices.push(i)
+        // fieldsPdf(files[i], i)
+      }
+    }
+  }
+  // Setting to LocalStorage
+  window.localStorage.setItem('docxIndices', docxIndices)
+  window.localStorage.setItem('pdfIndices', pdfIndices)
+}
 
-function processPdf (file) {
+// Converts to HTML
+function fieldsDocx (file, id) {
+  mammoth.convertToHtml(file)
+    .then(function (result) {
+      let names = []
+      let fields = result.value.split('<p>')
+      fields.forEach(function (field) {
+        if ((field.match(/_/g) || []).length > 7) { // Looks for the __
+          field = field.replace(/<[^>]*>/g, '')
+          let words = field.split(/\b(\s)/)
+          words = words.filter(v => v != '') // Trims empty strings
+          // words = words.map(w => w.trim())
+          let fieldNames = fieldSearch(words)
+          fieldNames.forEach(function (element) {
+            names.push(element) // Stores fields in an array
+          })
+        }
+      })
+      // console.log(names)
+      ls.set(id, names)
+    })
+  // return fields
+}
+
+function fieldsPdf (file, id) {
 
 }
 
-function searchChar (arr) {
-
-}
-
+// Pushes fields into an array
 function fieldSearch (words) {
   let fieldNames = []
   let nextStart = 0
