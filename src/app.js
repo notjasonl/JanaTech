@@ -40,7 +40,7 @@ app.get('/help', function (req, res) {
 
 app.get('/finish', function (req, res) {
   res.sendFile(path.join(__dirname, '/pages/finish.html'))
-])
+})
 
 app.post('/api/upload', function (req, res) {
   upload(req, res, function (err) {

@@ -15,6 +15,12 @@ var folder = document.getElementById('user-select')
 
 let files = readFilesSync(folderPath)
 
+setTimeout(() => {
+  let fields = ls.get('1')
+  console.log(fields)
+})
+// processData(ls.get('1'))
+
 // docx and pdf are expected to be arrays of indices where those files are found
 // directory is a file path pointing to the directory where files are uploaded
 function fillAll (directory) {
@@ -23,11 +29,12 @@ function fillAll (directory) {
     if (fileType(files[i]) === undefined) {} else {
       if (fileType(files[i]).ext === 'docx') {
         let fields = []
+        let data = ls.get('formData')
         setTimeout(() => { fields = ls.get(i.toString()) })
-        fill(files[i], fields, )
+        fill(files[i], fields, data, true)
       }
       else if (fileType(files[i]).ext === 'pdf') {
-        let fields;
+        let fields = []
         setTimeout(() => { fields = ls.get(i.toString()) })
       }
     }
@@ -42,9 +49,15 @@ function fill (file, fields, data, isDocx) {
 
 }
 
-function processData (fields, data) {
+// this function should have a data parameter, removed for testing
+function processData (fields) {
+  let output = {}
+  let data = window.localStorage.getItem('formData')
+  console.log(data)
+  console.log(fields)
   fields.forEach(function (field) {
-
+    // Add key/value pairs for field and value to output
+    output
   })
 }
 
@@ -59,28 +72,28 @@ function readFilesSync (dir) {
 
 // called if the file is a .docx file
 // returns list of field names
-function processDocx (file) {
-  mammoth.convertToHtml(file)
-    .then(function (result) {
-      let names = []
-      let fields = result.value.split('<p>')
-      fields.forEach(function (field) {
-        if ((field.match(/_/g)||[]).length > 7) {
-          field = field.replace(/<[^>]*>/g, '')
-          let words = field.split(/\b(\s)/)
-          words = words.filter(v => v !== '')
-          // words = words.map(w => w.trim())
-          let fieldNames = fieldSearch(words)
-          fieldNames.forEach(function (element) {
-            names.push(element)
-          })
-        }
-      })
-      // console.log(names)
-      allFieldNames = names
-    })
-  // return fields
-}
+// function processDocx (file) {
+//   mammoth.convertToHtml(file)
+//     .then(function (result) {
+//       let names = []
+//       let fields = result.value.split('<p>')
+//       fields.forEach(function (field) {
+//         if ((field.match(/_/g)||[]).length > 7) {
+//           field = field.replace(/<[^>]*>/g, '')
+//           let words = field.split(/\b(\s)/)
+//           words = words.filter(v => v !== '')
+//           // words = words.map(w => w.trim())
+//           let fieldNames = fieldSearch(words)
+//           fieldNames.forEach(function (element) {
+//             names.push(element)
+//           })
+//         }
+//       })
+//       // console.log(names)
+//       allFieldNames = names
+//     })
+//   // return fields
+// }
 
 function processPdf (file) {
 

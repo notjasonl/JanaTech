@@ -68,6 +68,7 @@
               var data = objectifyForm($('#formInside').serializeArray())
               window.localStorage.setItem("formData", data)
               event.preventDefault();
+              window.location.href = "http://localhost:3000/fill"
             })
             // $('#formInside').submit(function (event) {
             //   console.log($(this).serializeArray());
