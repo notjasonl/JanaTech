@@ -63,9 +63,8 @@
         from: 'janatech.smcs2021@email.com', // sender address
         to: document.getElementByID('email'), // receiver is the user's inputted email
         subject: 'Field Trip Forms', // Subject line
-        attachments: [ //NEED TO DO THIS NEED TO DO THIS
-          filename: '',
-          path: // However we get the filled forms goes here
+        attachments: [ //Attach forms from uploads folder to email
+          path: '../../uploads' + '/outputPDF' // Path to forms
         ]
       };
       transporter.sendMail(mailOptions, function (err, info) {
