@@ -1,3 +1,5 @@
+// Test fucntion to convert docx to 
+
 var docxConverter = require('docx-pdf');
 var numFiles = 0;
 const fs = require('fs');
