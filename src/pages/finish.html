@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
+
   <head lang="en" dir="ltr">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/main.css">
 
     <meta charset="utf-8">
@@ -15,97 +20,103 @@
     var docxConverter = require('docx-pdf');
     var numFiles = 0;
     const fs = require('fs');
-    inputFolder = 'api/uploads';
-
-    fs.readdir(inputFolder, (err, files)  => {
+    inputFolder = '../../uploads';
+    fs.readdir(inputFolder, (err, files) => {
+      console.log(err);
       files.forEach(file => {
-        numFiles++
-        docxConverter(inputFolder/file ,'./output.pdf',function(err,result){ //Need to change the output pdf so it doesn orride the saves
-          if(err){
+        numFiles++;
+        console.log(file);
+        var outputName = file.substring(0, file.indexOf(".")) + '.pdf';
+        docxConverter(inputFolder + '/' + file, inputFolder + '/outputPDF/' + outputName, function (err, result) { //Need to change the output pdf so it doesn orride the saves
+          if (err) {
             console.log(err);
-          }    
-          console.log('result'+result);
+          }
+          console.log('result' + result);
         });
       });
     });
-
 /*
-    for(var i = 0; i < numFiles; i++){
-      fs.readdir(inputFolder, (err, files)  => {
-        files.forEach(files => {
-        });
-      });
-      docxConverter(inputFolder/,'./output.pdf',function(err,result){
-        if(err){
-          console.log(err);
-      }    
-        console.log('result'+result);
-      });
-    */
-    
+        for(var i = 0; i < numFiles; i++){
+          fs.readdir(inputFolder, (err, files)  => {
+            files.forEach(files => {
+            });
+          });
+          docxConverter(inputFolder/,'./output.pdf',function(err,result){
+            if(err){
+              console.log(err);
+          }
+            console.log('result'+result);
+          });
+        */
+
 
   </script>
 
   <script>
-     function emailFunction(){
-       var transporter = nodemailer.createTransport(service: 'gmail',
+    function emailFunction() {
+      var transporter = nodemailer.createTransport(service: 'gmail',
         auth: {
           user: 'janatech.smcs2021@gmail.com',
           pass: 'loyson352'
         });
-       const mailOptions = {
+      const mailOptions = {
         from: 'janatech.smcs2021@email.com', // sender address
         to: document.getElementByID('email'), // receiver is the user's inputted email
         subject: 'Field Trip Forms', // Subject line
         attachments: [ //NEED TO DO THIS NEED TO DO THIS
-          filename:'',
+          filename: '',
           path: // However we get the filled forms goes here
         ]
-       };
+      };
       transporter.sendMail(mailOptions, function (err, info) {
-   if(err)
-     console.log(err)
-   else
-     console.log(info);
-     });
-       };
+        if (err)
+          console.log(err)
+        else
+          console.log(info);
+      });
+    };
   </script>
 
 
 
-  
+
   <div class="border">
+
     <body>
       <h1 class="display-4 jumbo-title">Form Filler <i class="fas fa-clipboard-list"></i></h1>
       <div style="text-align: center">
-            <div style="font-size: 24px;">
-                <a href="index" style="text-decoration: none">
-                    <i class="fas fa-arrow-circle-left" style="color:black"></i>
-                </a>
-            </div>
-            <small>Back Button</small> 
+        <div style="font-size: 24px;">
+          <a href="index" style="text-decoration: none">
+            <i class="fas fa-arrow-circle-left" style="color:black"></i>
+          </a>
+        </div>
+        <small>Back Button</small>
       </div>
       <hr class="my-4">
       <div class="card-container">
-          <div class="card">
+        <div class="card">
+          <div class="card-body">
+            <form action="emailFunction()">
+              <input type="text" name="Email">
+              <input type="submit" value="Email Forms to Me">
+            </form>
+          </div>
+        </div>
+        <div class="card">
+          <!-- Path to Uploads folder plz-->
+          <a href="path_to_file" download="proposed_file_name">
             <div class="card-body">
-              <form action="emailFunction()">
-                <input type="text" name="Email">
-                <input type="submit" value="Email Forms to Me">
-              </form>
+              <h5 class="card-title"> Download <i class="fas fa-file"></i></h5>
             </div>
-          </div>
-          <div class="card">
-            <!-- Path to Uploads folder plz-->
-              <a href="path_to_file" download="proposed_file_name"><div class="card-body"> 
-                  <h5 class="card-title"> Download <i class="fas fa-file"></i></h5>
-              </div></a>
-          </div>
-          <div class="card">
+          </a>
+        </div>
+        <div class="card">
     </body>
     <a href="help">
-       <div style="text-align:center; font-size: 24px;" class = "shadow p-3 mb-5 bg-white rounded"><i class="fas fa-info"></i>
-       </div>
-    </a>    
+      <div style="text-align:center; font-size: 24px;" class="shadow p-3 mb-5 bg-white rounded"><i
+          class="fas fa-info"></i>
+      </div>
+    </a>
   </div>
+
 </html>
