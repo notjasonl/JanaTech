@@ -22,3 +22,9 @@ head {
   padding: 0 !important;
   box-sizing: border-box !important;
 }
+
+.spinner-border {
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 10px;
+}
