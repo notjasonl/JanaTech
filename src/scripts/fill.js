@@ -18,12 +18,13 @@ let files = readFilesSync(folderPath)
 let docxIndices = []
 let pdfIndices = []
 
+let filledFile
+
+window.localStorage.clear()
+
 pushToStorage(files)
 
-setTimeout(() => {
-  let fields = window.localStorage.getItem('1')
-  console.log(fields)
-})
+fillAll(folderPath)
 
 // fillAll(folderPath)
 // processData(ls.get('1'))
@@ -35,11 +36,13 @@ function fillAll (directory) {
   for (let i = 0; i < files.length; i++) {
     if (fileType(files[i]) === undefined) {} else {
       if (fileType(files[i]).ext === 'docx') {
-        let fields = []
+        // let fields
         let data = window.localStorage.getItem('formData')
-        console.log(data)
-        setTimeout(() => { fields = window.localStorage.getItem(i.toString()) })
-        fill(files[i], fields, data, true)
+        console.log(i)
+        setTimeout(() => {
+          let fields = window.localStorage.getItem('0')
+          fill(files[i], fields, data, true)
+        })
       } else if (fileType(files[i]).ext === 'pdf') {
         let fields = []
         setTimeout(() => { fields = window.localStorage.getItem(i.toString()) })
@@ -53,19 +56,28 @@ function fillAll (directory) {
 // isDocx is a boolean
 // Should save the filled docx to /uploads
 function fill (file, fields, data, isDocx) {
-
+  mammoth.convertToHtml(file)
+    .then(function (result) {
+      fields = fields.split(',')
+      fields.map(field => {
+        let fieldIndex = result.value.indexOf(field)
+        let fieldLength = field.length
+        console.log(fieldLength)
+      })
+    })
 }
 
 // this function should have a data parameter, removed for testing
-function processData (fields) {
+function processData (fields, data) {
   let output = {}
-  let data = window.localStorage.getItem('formData')
+  // let data = window.localStorage.getItem('formData')
   console.log(data)
   console.log(fields)
   fields.forEach(function (field) {
     // Add key/value pairs for field and value to output
-    output
+    output[field] = data[field]
   })
+  return output
 }
 
 // read all files in directory synchronously
@@ -106,15 +118,16 @@ function fieldsDocx (file, id) {
           field = field.replace(/<[^>]*>/g, '')
           let words = field.split(/\b(\s)/)
           words = words.filter(v => v != '') // Trims empty strings
-          // words = words.map(w => w.trim())
           let fieldNames = fieldSearch(words)
+          fieldNames = fieldNames.map(f => f.trim())
+          // console.log(fieldNames)
           fieldNames.forEach(function (element) {
             names.push(element) // Stores fields in an array
           })
         }
       })
       // console.log(names)
-      ls.set(id, names)
+      window.localStorage.setItem(id, names)
     })
   // return fields
 }

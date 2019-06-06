@@ -38,6 +38,10 @@ app.get('/help', function (req, res) {
   res.sendFile(path.join(__dirname, '/pages/help.html'))
 })
 
+app.get('/query', function (req, res) {
+  res.sendFile(path.join(__dirname, '/pages/queryData.html'))
+})
+
 app.get('/finish', function (req, res) {
   res.sendFile(path.join(__dirname, '/pages/finish.html'))
 })
