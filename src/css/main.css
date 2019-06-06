@@ -52,3 +52,15 @@ CSS Class Definitions for all HTML pages
 .card-container {
   text-align: center;
 }
+
+.form {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.form:hover {
+  background-color: #7f8693; /* Grey */
+  color: white;
+}
