@@ -10,6 +10,17 @@ head {
     text-color: black;
     
 }
+.form {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.form:hover {
+  background-color: #7f8693; /* Grey */
+  color: white;
+}
 .jumbo-title {
     text-align: center;
     margin-top: 30px;
@@ -29,21 +40,27 @@ head {
 }
 .list { 
   border-style: groove;
-  border-color: #7f8693;
+  border-color: #7f8693; /* Grey */
   padding-left: 10px;
   font-size: 24px;
   font-weight: bold;
   width: 100%;
 }
 .list-contents {
+  width: 49%;
+  padding: 25px;
+  border: 1px solid blue;
+}
+.list-contents2 {
   width: 100%;
   padding: 25px;
   border: 1px solid blue;
 }
 .example {
   overflow: scroll;
-  padding: 5px;
-  padding-top: 15px;
-  width: 90%;
-  height: 90%;
+  float: right;
+  width: 49%;
+  padding: 10px;
+  padding-top: 25px;
+  border: 1px solid blue;
 }
