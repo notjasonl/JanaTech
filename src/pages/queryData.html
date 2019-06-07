@@ -38,7 +38,8 @@
             createForms(fields);
             $('#submit1').click(function (event) {
               var data = objectifyForm($('#formInside').serializeArray())
-              window.localStorage.setItem("formData", data)
+              window.localStorage.setItem("formData", JSON.stringify(data))
+              console.log(data)
               event.preventDefault();
               window.location.href = "http://localhost:3000/fill"
             })

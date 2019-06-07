@@ -8,8 +8,8 @@ const fs = require('fs')
 // Should only be called once
 // Utilizes the browser's local storage functionality to store persistant data
 
-const folderPath = '/Users/jasonliu/git/JanaTech/uploads'
-// const folderPath = 'C:/Users/dev/git/JanaTech/uploads'
+// const folderPath = '/Users/jasonliu/git/JanaTech/uploads'
+const folderPath = 'C:/Users/dev/git/JanaTech/uploads'
 
 let files = readFilesSync(folderPath)
 // Use these to locate the fields afterwards

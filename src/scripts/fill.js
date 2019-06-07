@@ -4,9 +4,11 @@ const mammoth = require('mammoth')
 const fileType = require('file-type')
 const path = require('path')
 const fs = require('fs')
+const htmlDocx = require('html-docx-js')
+const FileSaver = require('file-saver')
 
-const folderPath = '/Users/jasonliu/git/JanaTech/uploads'
-// const folderPath = 'C:/Users/dev/git/JanaTech/uploads'
+// const folderPath = '/Users/jasonliu/git/JanaTech/uploads'
+const folderPath = 'C:/Users/dev/git/JanaTech/uploads'
 // const folderPath = '/home/jason/git/JanaTech/uploads'
 
 // var fileList = document.getElementById('file-list')
@@ -35,10 +37,10 @@ function fillAll (directory) {
     if (fileType(files[i]) === undefined) {} else {
       if (fileType(files[i]).ext === 'docx') {
         // let fields
-        let data = window.localStorage.getItem('formData')
-        window.alert(JSON.stringify(data))
+        // window.alert(JSON.stringify(data))
         setTimeout(() => {
-          let fields = window.localStorage.getItem('0')
+          let fields = window.localStorage.getItem(i.toString())
+          let data = JSON.parse(window.localStorage.getItem('formData'))
           // data = processData(fields, data)
           fill(files[i], fields, data, true)
         })
@@ -57,39 +59,29 @@ function fillAll (directory) {
 function fill (file, fields, data, isDocx) {
   mammoth.convertToHtml(file)
     .then(function (result) {
+      let html = result.value
       fields = fields.split(',')
+      console.log(fields)
       fields.map(field => {
-        let fieldIndex = result.value.indexOf(field)
+        let fieldIndex = html.indexOf(field)
         let fieldLength = field.length
         let underscore = ''
 
-        for (let i = fieldIndex + fieldLength; i < fieldIndex + fieldLength + 50; i++) {
+        for (let i = fieldIndex + fieldLength; i < fieldIndex + fieldLength + 100; i++) {
           // console.log(result.value[i])
-          if (result.value[i + 1] === '_') {
-            if (result.value[i] === '_') {
+          if (html[i + 1] === '_') {
+            if (html[i] === '_') {
               underscore += '_'
             }
           } else {
+            underscore += '_'
             break
           }
         }
-        result.value.replace(underscore, field)
+        html = html.replace(underscore, data[field])
       })
+      FileSaver.saveAs(,'')
     })
-}
-
-// this function should have a data parameter, removed for testing
-function processData (fields, data) {
-  let output = {}
-  // let data = window.localStorage.getItem('formData')
-  console.log(typeof data)
-  fields = fields.split(',')
-  fields.forEach(function (field) {
-    // Add key/value pairs for field and value to output
-    output[field] = data[field]
-  })
-  console.log(JSON.stringify(output))
-  return output
 }
 
 // read all files in directory synchronously
