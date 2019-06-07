@@ -20,13 +20,9 @@ let pdfIndices = []
 
 let filledFile
 
-window.localStorage.clear()
-
-pushToStorage(files)
-
-combineFields()
-
 fillAll(folderPath)
+
+// window.location.href = 'http://localhost:3000/finish'
 
 // fillAll(folderPath)
 // processData(ls.get('1'))
@@ -40,9 +36,10 @@ function fillAll (directory) {
       if (fileType(files[i]).ext === 'docx') {
         // let fields
         let data = window.localStorage.getItem('formData')
+        window.alert(JSON.stringify(data))
         setTimeout(() => {
           let fields = window.localStorage.getItem('0')
-          data = processData(fields, data)
+          // data = processData(fields, data)
           fill(files[i], fields, data, true)
         })
       } else if (fileType(files[i]).ext === 'pdf') {
@@ -81,18 +78,17 @@ function fill (file, fields, data, isDocx) {
     })
 }
 
-
-
 // this function should have a data parameter, removed for testing
 function processData (fields, data) {
   let output = {}
   // let data = window.localStorage.getItem('formData')
-  console.log(data)
-  console.log(fields)
+  console.log(typeof data)
+  fields = fields.split(',')
   fields.forEach(function (field) {
     // Add key/value pairs for field and value to output
     output[field] = data[field]
   })
+  console.log(JSON.stringify(output))
   return output
 }
 

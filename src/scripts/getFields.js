@@ -1,4 +1,3 @@
-const ipc = require('electron').ipcRenderer
 const mammoth = require('mammoth')
 // const FileReader = require('filereader')
 const fileType = require('file-type')
@@ -17,11 +16,29 @@ let files = readFilesSync(folderPath)
 let docxIndices = []
 let pdfIndices = []
 
+window.localStorage.clear()
+
 pushToStorage(files)
 combineFields()
 
 function combineFields () {
-  
+  let fields = []
+  let docxIndices = window.localStorage.getItem('docxIndices')
+  docxIndices = docxIndices.length > 1 ? docxIndices.split(',') : docxIndices.split()
+  docxIndices.forEach(function (ind) {
+    setTimeout(() => {
+      fields.push(window.localStorage.getItem(ind.toString()))
+    }, 200)
+  })
+  setTimeout(() => {
+    if (fields.length > 1) {
+      fields = [].concat.apply([], fields)
+    } else {
+      fields = fields[0].split(',')
+    }
+    fields = [...new Set(fields)]
+    window.localStorage.setItem('fields', fields)
+  }, 500)
 }
 
 // Puts in different array based on file extension
@@ -61,7 +78,7 @@ function fieldsDocx (file, id) {
         if ((field.match(/_/g) || []).length > 7) { // Looks for the __
           field = field.replace(/<[^>]*>/g, '')
           let words = field.split(/\b(\s)/)
-          words = words.filter(v => v != '') // Trims empty strings
+          words = words.filter(v => v !== '') // Trims empty strings
           let fieldNames = fieldSearch(words)
           // fieldNames = fieldNames.map(f => f.trim())
           // console.log(fieldNames)
@@ -76,9 +93,9 @@ function fieldsDocx (file, id) {
   // return fields
 }
 
-function fieldsPdf (file, id) {
+// function fieldsPdf (file, id) {
 
-}
+// }
 
 // Pushes fields into an array
 function fieldSearch (words) {
@@ -97,4 +114,3 @@ function fieldSearch (words) {
   }
   return fieldNames
 }
-``

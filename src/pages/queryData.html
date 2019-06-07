@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -8,7 +7,7 @@
         <meta charset="utf-8">
     </head>
     <body class="border">
-      <h1 class="display-4 jumbo-title">Fill in Data<i class="fas fa-clipboard-list"></i></h1>
+      <h1 class="display-4 jumbo-title">Fill in Data <i class="fas fa-clipboard-list"></i></h1>
       <div class="jumbotron jumbotron-fluid" >
         <div class="container">
           <h1 class="display-5">Do not hit enter until all fields are filled </h1>
@@ -17,18 +16,37 @@
       </div>
       
       <!-- Takes in an array of the fields and makes a HTML Form for them dynamically -->
-      <div id="form" style="text-align: center">
+      <div id="form" style="text-align: center; overflow: scroll; height: 40%; width: 90%;">
           
       </div> 
       <div id="results">
 
       </div>
 
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      
     
     
     
     <script>
+        const $ = require('jquery')
+
+        $(document).ready(function(){
+            let fields = window.localStorage.getItem('fields')
+            fields = fields.split(',')
+            fields.map(f => f.trim())
+            // var fields = ["name", "school", "teacher"];//test data
+            createForms(fields);
+            $('#submit1').click(function (event) {
+              var data = objectifyForm($('#formInside').serializeArray())
+              window.localStorage.setItem("formData", data)
+              event.preventDefault();
+              window.location.href = "http://localhost:3000/fill"
+            })
+            // $('#formInside').submit(function (event) {
+            //   console.log($(this).serializeArray());
+            //   event.preventDefault();
+            // });
+        });
         //const ls = require(local-storage)
         //letls.get('1') => ['name', 'date'] 
         function createForms(fieldsArray){
@@ -56,25 +74,8 @@
             }
             return returnArray;
         }
-      </script>
-  
-      <script>
         // Sends content of the form through LocalStorage in JSON
-          $(document).ready(function(){
-            window.localStorage.clear()
-            var fields = ["name", "school", "teacher"];//test data
-            createForms(fields);
-            $('#submit1').click(function (event) {
-              var data = objectifyForm($('#formInside').serializeArray())
-              window.localStorage.setItem("formData", data)
-              event.preventDefault();
-              window.location.href = "http://localhost:3000/fill"
-            })
-            // $('#formInside').submit(function (event) {
-            //   console.log($(this).serializeArray());
-            //   event.preventDefault();
-            // });
-          });
+          
       </script>
     </body>
 </html>
