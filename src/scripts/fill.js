@@ -16,6 +16,8 @@ const folderPath = 'C:/Users/dev/git/JanaTech/uploads'
 // var folder = document.getElementById('user-select')
 
 let files = readFilesSync(folderPath)
+let filenames = fs.readdirSync(folderPath)
+// console.log(filenames)
 
 let docxIndices = []
 let pdfIndices = []
@@ -24,7 +26,7 @@ let filledFile
 
 fillAll(folderPath)
 
-// window.location.href = 'http://localhost:3000/finish'
+window.location.href = 'http://localhost:3000/finish'
 
 // fillAll(folderPath)
 // processData(ls.get('1'))
@@ -42,7 +44,7 @@ function fillAll (directory) {
           let fields = window.localStorage.getItem(i.toString())
           let data = JSON.parse(window.localStorage.getItem('formData'))
           // data = processData(fields, data)
-          fill(files[i], fields, data, true)
+          fill(files[i], fields, data, true, filenames[i])
         })
       } else if (fileType(files[i]).ext === 'pdf') {
         let fields = []
@@ -56,7 +58,7 @@ function fillAll (directory) {
 // File is expected to be a Buffer containing a .docx or a .pdf file
 // isDocx is a boolean
 // Should save the filled docx to /uploads
-function fill (file, fields, data, isDocx) {
+function fill (file, fields, data, isDocx, filename) {
   mammoth.convertToHtml(file)
     .then(function (result) {
       let html = result.value
@@ -80,7 +82,7 @@ function fill (file, fields, data, isDocx) {
         }
         html = html.replace(underscore, data[field])
       })
-      FileSaver.saveAs(htmlDocx.asBlob(html),'')
+      FileSaver.saveAs(htmlDocx.asBlob(html), filename)
     })
 }
 
