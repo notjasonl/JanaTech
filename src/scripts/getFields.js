@@ -18,6 +18,11 @@ let docxIndices = []
 let pdfIndices = []
 
 pushToStorage(files)
+combineFields()
+
+function combineFields () {
+  
+}
 
 // Puts in different array based on file extension
 function pushToStorage (files) {
@@ -56,9 +61,10 @@ function fieldsDocx (file, id) {
         if ((field.match(/_/g) || []).length > 7) { // Looks for the __
           field = field.replace(/<[^>]*>/g, '')
           let words = field.split(/\b(\s)/)
-          words = words.filter(v => v != '') // Finds the fields
-          // words = words.map(w => w.trim())
+          words = words.filter(v => v != '') // Trims empty strings
           let fieldNames = fieldSearch(words)
+          // fieldNames = fieldNames.map(f => f.trim())
+          // console.log(fieldNames)
           fieldNames.forEach(function (element) {
             names.push(element) // Stores fields in an array
           })
@@ -91,3 +97,4 @@ function fieldSearch (words) {
   }
   return fieldNames
 }
+``

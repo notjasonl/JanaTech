@@ -4,10 +4,10 @@ const mammoth = require('mammoth')
 const fileType = require('file-type')
 const path = require('path')
 const fs = require('fs')
-const ls = require('local-storage')
 
 const folderPath = '/Users/jasonliu/git/JanaTech/uploads'
 // const folderPath = 'C:/Users/dev/git/JanaTech/uploads'
+// const folderPath = '/home/jason/git/JanaTech/uploads'
 
 // var fileList = document.getElementById('file-list')
 // var confirm = document.getElementById('confirm')
@@ -24,6 +24,8 @@ window.localStorage.clear()
 
 pushToStorage(files)
 
+combineFields()
+
 fillAll(folderPath)
 
 // fillAll(folderPath)
@@ -38,9 +40,9 @@ function fillAll (directory) {
       if (fileType(files[i]).ext === 'docx') {
         // let fields
         let data = window.localStorage.getItem('formData')
-        console.log(i)
         setTimeout(() => {
           let fields = window.localStorage.getItem('0')
+          data = processData(fields, data)
           fill(files[i], fields, data, true)
         })
       } else if (fileType(files[i]).ext === 'pdf') {
@@ -62,10 +64,24 @@ function fill (file, fields, data, isDocx) {
       fields.map(field => {
         let fieldIndex = result.value.indexOf(field)
         let fieldLength = field.length
-        console.log(fieldLength)
+        let underscore = ''
+
+        for (let i = fieldIndex + fieldLength; i < fieldIndex + fieldLength + 50; i++) {
+          // console.log(result.value[i])
+          if (result.value[i + 1] === '_') {
+            if (result.value[i] === '_') {
+              underscore += '_'
+            }
+          } else {
+            break
+          }
+        }
+        result.value.replace(underscore, field)
       })
     })
 }
+
+
 
 // this function should have a data parameter, removed for testing
 function processData (fields, data) {
@@ -89,67 +105,6 @@ function readFilesSync (dir) {
   return files
 }
 
-// Puts in different array based on file extension
-function pushToStorage (files) {
-  for (let i = 0; i < files.length; i++) {
-    if (fileType(files[i]) === undefined) {} else {
-      if (fileType(files[i]).ext === 'docx') {
-        docxIndices.push(i)
-        fieldsDocx(files[i], i)
-      } else if (fileType(files[i]).ext === 'pdf') {
-        pdfIndices.push(i)
-        // fieldsPdf(files[i], i)
-      }
-    }
-  }
-  // Setting to LocalStorage
-  window.localStorage.setItem('docxIndices', docxIndices)
-  window.localStorage.setItem('pdfIndices', pdfIndices)
-}
-
-// Converts to HTML
-function fieldsDocx (file, id) {
-  mammoth.convertToHtml(file)
-    .then(function (result) {
-      let names = []
-      let fields = result.value.split('<p>')
-      fields.forEach(function (field) {
-        if ((field.match(/_/g) || []).length > 7) { // Looks for the __
-          field = field.replace(/<[^>]*>/g, '')
-          let words = field.split(/\b(\s)/)
-          words = words.filter(v => v != '') // Trims empty strings
-          let fieldNames = fieldSearch(words)
-          fieldNames = fieldNames.map(f => f.trim())
-          // console.log(fieldNames)
-          fieldNames.forEach(function (element) {
-            names.push(element) // Stores fields in an array
-          })
-        }
-      })
-      // console.log(names)
-      window.localStorage.setItem(id, names)
-    })
-  // return fields
-}
-
 function fieldsPdf (file, id) {
 
-}
-
-// Pushes fields into an array
-function fieldSearch (words) {
-  let fieldNames = []
-  let nextStart = 0
-  for (let i = 0; i < words.length; i++) {
-    if (words[i].includes('_')) {
-      let fieldName = ''
-      for (let j = nextStart; j < i; j++) {
-        // console.log(words[j], j)
-        fieldName += words[j]
-      }
-      fieldNames.push(fieldName)
-      nextStart = i + 1
-    }
-  }
-  return fieldNames
 }
