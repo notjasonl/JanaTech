@@ -61,17 +61,6 @@ head {
   float: right;
   width: 49%;
   padding: 10px;
-  padding-top: 25px;
+  height: 500px;
   border: 1px solid blue;
-}
-.form {
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  border: 1px solid black;
-  text-align: center;
-}
-
-.form:hover {
-  background-color: #7f8693; /* Grey */
-  color: white;
 }
