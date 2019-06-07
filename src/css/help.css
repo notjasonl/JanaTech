@@ -13,6 +13,7 @@ head {
 .form {
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
+  width: auto !important;
   border: 1px solid black;
   text-align: center;
 }
@@ -63,4 +64,26 @@ head {
   padding: 10px;
   height: 500px;
   border: 1px solid blue;
+}
+
+.help-img {
+  max-height: 220px;
+  max-width: 320px;
+  /* height: auto; */
+  width: auto;
+  transition-duration: 0.5s;
+}
+
+.show {
+  height: auto !important;
+}
+
+.hide {
+  height: 0px;
+}
+
+.card {
+  margin-left: 2rem !important;
+  margin-right: 2rem !important;
+  width: auto !important;
 }
