@@ -80,7 +80,7 @@ function fill (file, fields, data, isDocx) {
         }
         html = html.replace(underscore, data[field])
       })
-      FileSaver.saveAs(,'')
+      FileSaver.saveAs(htmlDocx.asBlob(html),'')
     })
 }
 
