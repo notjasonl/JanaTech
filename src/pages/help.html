@@ -10,6 +10,26 @@
         <title></title>
     </head>
   
+    <script>
+      function display(id) { //When one of the buttons is clicked, a corresponding image for that step pops up
+        if (id=='1') {
+          document.getElementById(id).src = "yang";
+        }
+        else if (id=='2') {
+          document.getElementById(id).src = "yang";
+        }
+        else if (id=='3') {
+          document.getElementById(id).src = "yang";
+        }
+        else if (id=='4') {
+          document.getElementById(id).src = "yang";
+        }
+        else if (id=='5') {
+          document.getElementById(id).src = "yang";
+        }
+      }
+    </script>
+  
     <body class="border">
       <h1 class="display-4 jumbo-title">Form Filler <i class="fas fa-clipboard-list"></i></h1>
       <div style="text-align: center">
@@ -26,31 +46,48 @@
         <p class = "list"><u>How to use the program: </u></p>
         <!--Right column with images-->
         <div class="example">
+          <h5>Visual Aid</h5>
           <div class="card">
-          <a href="new"><div class="card-body">
+          <button class="form" onclick="display('1')"><div class="card-body">
             <h5 class="card-title">Step 1 <i class="fas fa-file"></i></h5>
-          </div></a>
+          </div></button>
           </div>
           <div class="card">
-          <a href="new"><div class="card-body">
+            <img id="1" src="">
+          </div>
+          <div class="card">
+          <button class="form" onclick="display('2')"><div class="card-body">
             <h5 class="card-title">Step 2 <i class="fas fa-file"></i></h5>
-          </div></a>
+          </div></button>
           </div>
           <div class="card">
-          <a href="new"><div class="card-body">
+            <img id="2" src="">
+          </div>
+          <div class="card">
+          <button class="form" onclick="display('3')"><div class="card-body">
             <h5 class="card-title">Step 3 <i class="fas fa-file"></i></h5>
-          </div></a>
+          </div></button>
           </div>
           <div class="card">
-          <a href="new"><div class="card-body">
+            <img id="3" src="">
+          </div>
+          <div class="card">
+          <button class="form" onclick="display('4')"><div class="card-body">
             <h5 class="card-title">Step 4 <i class="fas fa-file"></i></h5>
-          </div></a>
+          </div></button>
           </div>
           <div class="card">
-          <a href="new"><div class="card-body">
-            <h5 class="card-title">Step 5 <i class="fas fa-file"></i></h5>
-          </div></a>
+            <img id="4" src="">
           </div>
+          <div class="card">
+          <button class="form" onclick="display('5')"><div class="card-body">
+            <h5 class="card-title">Step 5 <i class="fas fa-file"></i></h5>
+          </div></button>
+          </div>
+          <div class="card">
+            <img id="5" src="">
+          </div>
+          
           <!--Left column with written explanations-->
         </div>
           <ol class="list-contents">
