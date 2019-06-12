@@ -37,6 +37,7 @@ function combineFields () {
       fields = fields[0].split(',')
     }
     fields = [...new Set(fields)]
+    // console.log(fields)
     window.localStorage.setItem('fields', fields)
   }, 500)
 }
@@ -75,10 +76,44 @@ function fieldsDocx (file, id) {
       let names = []
       let fields = result.value.split('<p>')
       fields.forEach(function (field) {
-        if ((field.match(/_/g) || []).length > 7) { // Looks for the __
+        if ((field.match(/_/g) || []).length > 6) { // Looks for the __
           field = field.replace(/<[^>]*>/g, '')
           let words = field.split(/\b(\s)/)
           words = words.filter(v => v !== '') // Trims empty strings
+          for (let i = 0; i < words.length; i++) {
+            if (words[i].includes(':')) {
+              words[i] = words[i].split(':')[0]
+            }
+            let char = '_'
+            let same = true
+            for (let j = 0; j < words[i].length; j++) {
+              if (words[i][j] !== char) {
+                same = false
+              }
+            }
+            if (same === false) {
+              let start = 0
+              let end = 0
+              for (let j = 0; j < words[i].length; j++) {
+                if (words[i][j] !== char) {
+                  start = j
+                  break
+                }
+              }
+              for (let k = start; k < words[i].length; k++) {
+                if (words[i][k] === char) {
+                  end = k
+                  break
+                }
+              }
+              if (start !== end) {
+                words.splice(i, 1)
+                words.push(words[i].substring(start, end + 1))
+                console.log(words[i].substring(start, end + 1))
+              }
+            }
+            // console.log(words)
+          }     
           let fieldNames = fieldSearch(words)
           // fieldNames = fieldNames.map(f => f.trim())
           // console.log(fieldNames)
@@ -87,7 +122,7 @@ function fieldsDocx (file, id) {
           })
         }
       })
-      // console.log(names)
+      console.log(names)
       window.localStorage.setItem(id, names)
     })
   // return fields
