@@ -16,18 +16,40 @@
       </div>
       
       <!-- Takes in an array of the fields and makes a HTML Form for them dynamically -->
-      <div id="form" style="text-align: center; overflow: scroll; height: 40%; width: 90%;">
-          
-      </div> 
-
-      <div id="results">
-
-      </div>
-
-      
-    
-    
-    
+      <div id="results" style="text-align:center">
+        <form>
+            date <br>
+            <input type="text" name="firstname">
+            
+            <br>
+               principal <br>
+            <input type="text" name="d">
+            <br>
+            email <br>
+            <input type="text" name="gs">
+            <br>
+            date <br>
+            <input type="text" name="gf">
+            <br>
+            name <br>
+            <input type="text" name="gsd">
+            <br>
+               supervisor <br>
+            <input type="text" name="gd">
+            <br>
+            Num of Volunteers <br>
+            <input type="text" name="gg">
+            <br>
+        </form>
+        <br>
+        <button type="button" class="btn btn-primary">Submit</button>
+    </div>
+    <script>
+        var delayInMilliseconds = 5000; //1 second
+        setTimeout(function() {
+            alert("Fill all the fields");
+        }, delayInMilliseconds);
+    </script>
     <script>
         const $ = require('jquery')
 
@@ -51,16 +73,24 @@
         });
         //const ls = require(local-storage)
         //letls.get('1') => ['name', 'date'] 
+        //amruth nare
         function createForms(fieldsArray){
             var str=[];
             var i;
+            var x = "", j;
+            var q = ["Erin", "Binns", "test@gmail.com", "6", "9", "case", "test", "7/4/19", "6/1/19" ]; //test cases
             str.push('<form id="formInside">')
             for(i = 0; i <fieldsArray.length; i++){
+                var p = Math.floor(Math.random() * q.length); //randomly picks a test case
+                var result = q[p]
                 str.push('<label value ="')
                 str.push(fieldsArray[i])
                 str.push('">')
                 str.push(fieldsArray[i])
-                str.push('  <input type="text" id="'+fieldsArray[i]+'" name="'+fieldsArray[i]+ '">')
+                str.push('  <input type="text" id="'+fieldsArray[i]
+                str.push('" name="'+fieldsArray[i]
+                str.push('  value=' + result ) //Takes the Random Test Case
+                str.push('">')
                 str.push('</label>')
                 str.push('<br></br>')
                 console.log("i")
@@ -81,3 +111,6 @@
       </script>
     </body>
 </html>
+
+
+
