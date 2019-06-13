@@ -42,6 +42,7 @@ function fillAll (directory) {
         // window.alert(JSON.stringify(data))
         setTimeout(() => {
           let fields = window.localStorage.getItem(i.toString())
+          // console.log(fields)
           let data = JSON.parse(window.localStorage.getItem('formData'))
           // data = processData(fields, data)
           fill(files[i], fields, data, true, filenames[i])

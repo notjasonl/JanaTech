@@ -5,6 +5,8 @@ Creating a Field Trip Paperwork filler
 
 ## Setup Development Environment
 
+### Make sure Node, NPM, and Git are installed on your system
+
 ```
 git clone https://github.com/jazon-liu/JanaTech.git
 cd JanaTech

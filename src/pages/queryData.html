@@ -33,6 +33,9 @@
 
         $(document).ready(function(){
             let fields = window.localStorage.getItem('fields')
+            if (fields[0] = ',') {
+              fields = fields.substring(1)
+            }
             fields = fields.split(',')
             fields.map(f => f.trim())
             var fieldsarr = ["name", "email", "date", "Number of Chaperones"];//test data
